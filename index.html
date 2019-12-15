@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>学习录播器</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div class="mains">
+        <!-- 导航条 -->
+        <div class="topnav">
+            <a class="active" href="index.html">主页</a>
+            <a href="denglu.html">关于</a>
+            <a href="denglu.html">联系我们</a>
+            <input type="text" placeholder="搜索..">
+        </div>
+
+        <div class="content">
+            <!-- 左侧导航栏 -->
+            <div class="con_l">
+                <ul>
+                    <li><a href="http://www.w3school.com.cn/index.html">W3school官网</a></li>
+                    <li><a href="https://www.bilibili.com/">哔哩哔哩</a></li>
+                    <li><a
+                            href="https://www.bilibili.com/video/av5862916?from=search&seid=7804964928491717329">HTML学习视频</a>
+                    </li>
+                    <li><a href="http://www.baidu.com.cn">百度一下</a></li>
+                    <li><a href="https://www.runoob.com/">菜鸟教程</a></li>
+                    <li><a href="https://www.icourse163.org/">中国大学MOOC</a></li>
+                    <li><a href="http://erya.mooc.chaoxing.com/">超星尔雅</a></li>
+
+                </ul>
+            </div>
+            <!-- 视频 -->
+            <div class="con_cen">
+                <video id="videos" class="video" controls>
+                    <source src="3.mp4" type="video/mp4">
+            </div>
+
+            <div class="con_r">
+                <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+                <img class="img" src="1.gif" alt="John" style="width:90%">
+                <div class="container">
+                    <h1>黎远超</h1>
+                    <p class="title">物联网17班</p>
+                    <p>201706403110</p>
+                    <div style="margin: 24px 0;">
+                        <a href="qq_login.html"><i class="fa fa-qq"></i></a>
+                        <a href="bg.html"><i class="fa fa-twitter"></i></a>
+                        <a href="bg.html"><i class="fa fa-wechat"></i></a>
+                        <a href="bg.html"><i class="fa fa-facebook"></i></a>
+                    </div>
+                    <button class=" but but5" onclick="denglu()">点击跳转到登录页面</button>
+                </div>
+            </div>
+        </div>
+        <div class="cl"></div>
+        <div>
+            <div style="text-align:center;" >
+                <button class="but but1"  onclick="playPause()" type="button">播放/暂停</button>
+                <button class="but but2" onclick="luyin()" type="button">录音问答</button>
+                <button class="but but3" onclick="wenben()" type="button">文本问答</button>
+                <button class="but but4" onclick="videoQA()" type="button">视频问答</button>
+				
+                <!--弹窗-->
+                <div class="tc">
+                    <div id="d2"></div>
+                    <!-- <button onclick="chickMe()">点击</button> -->
+                    <div id="d1">
+                        <div class="top">
+                            <!-- <span>444</span> -->
+                            <div class="tc_tit">
+                                <!--<span class="xstwtc"></span>-->
+                                <a href="javascript:void(0)" onclick="closes()">&#935;</a>
+                            </div>
+                            <div class="question">您是否确定观看视频，学习知识？</div>
+                        </div>
+                        <input type="text" class="number" placeholder="请输入" id="number">
+                        <div class="submit">
+                            <!-- <input type="checkbox" value="111"> -->
+                            <button class="cancel" onclick="cancel()">取消</button>
+                            <button class="confirm" onclick="confirm()">确定</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+		/* background-color: red; */
+		background: url(3.jpg) no-repeat;
+		background-size: cover;
+ /*       background: url(1.jpg) no-repeat ·; */
+    }
+
+    .mains {
+        width: 100%;
+        /* height: 939px; */
+        margin: 0 auto;
+		/* background: url('3.jpg') no-repeat scroll top; */
+    }
+
+    .topnav {
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
+        background-color: #e9e9e9;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 25px;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #2196F3;
+        color: white;
+    }
+
+    .topnav input[type=text] {
+        float: right;
+        padding: 6px;
+        margin-top: 8px;
+        margin-right: 16px;
+        border: none;
+        font-size: 17px;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .topnav a,
+        .topnav input[type=text] {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+        }
+
+        .topnav input[type=text] {
+            border: 1px solid #ccc;
+        }
+    }
+
+    .sidenav {
+        width: 130px;
+        position: fixed;
+        z-index: 1;
+        top: 150px;
+        left: 10px;
+        background: #eee;
+        overflow-x: hidden;
+        padding: 8px 0;
+    }
+
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #2196F3;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #064579;
+    }
+
+    .content {
+        width: 100%;
+        /* float: left; */
+    }
+
+    .con_l {
+        float: left;
+        width: 20%;
+        height: 550px;
+        font-size: 35px;
+        /* padding-top: 90px; */
+    }
+
+    .con_l a:hover {
+        color: #064579;
+    }
+
+    .con_cen {
+        float: left;
+        width: 60%;
+        height: 550px;
+        /* background-color: green; */
+    }
+
+    .con_r {
+        float: left;
+        width: 20%;
+        height: 550px;
+        /* background-color: red; */
+    }
+
+    .cl {
+        clear: both;
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul li {
+        text-align: center;
+        /* padding-left: 30px; */
+    }
+
+    ul li a {
+       text-decoration: none;
+           color:#333333;
+           font-size: 25px;
+           background:#0099cc;
+           border: solid 1px #fff;
+           display: block;
+           line-height: 65px
+
+    }
+
+
+    .con_r {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family: arial;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .container::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+
+    /* 弹框 */
+    #d1 {
+        border-radius: 5px;
+        width: 400px;
+        height: 230px;
+        z-index: 2;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -200px;
+        margin-top: -150px;
+        overflow: hidden;
+        display: none;
+        background-color: white;
+    }
+
+    #d2 {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: grey;
+        z-index: 1;
+        opacity: 0.8;
+        display: none;
+    }
+
+    #number {
+        display: block;
+        width: 90%;
+        height: 30px;
+        margin: 10px auto 30px auto;
+        border: solid 1px #248CD6;
+        border-radius: 5px;
+        outline: none;
+        text-indent: 10px;
+
+    }
+
+    #number:focus {
+        border: solid 1px #248CD6;
+        border-radius: 5px;
+        box-shadow: 0 0 8px #248CD6;
+    }
+
+    .tc .submit {
+        display: flex;
+        width: 90%;
+        height: 40px;
+        margin: 20px auto;
+    }
+
+    .tc .cancel,
+    .confirm {
+        flex: 1;
+        margin: 3px;
+        border: none;
+        transition: all 0.2s;
+    }
+
+    .tc .cancel:hover,
+    .confirm:hover {
+        background-color: #248CD6;
+        color: white;
+    }
+
+    .tc .top a {
+        font-size: 20px;
+        float: right;
+        margin-right: 2px;
+        text-decoration: none;
+        color: #3A3C3D;
+        opacity: 0.8;
+    }
+
+    .tc .top a:hover {
+        opacity: 1;
+    }
+
+    .xstw {
+        line-height: 35px;
+        margin-top: 25px;
+    }
+
+    .xstw input {
+
+        width: 125px;
+        height: 35px;
+        /*margin: 0 50px;*/
+        border-radius: 25px;
+        border: 1px solid #DBDBDB;
+        outline: none;
+        background-color: #4d99fd;
+    }
+
+    .tc_tit {
+        padding: 0 16px;
+        color: #3A3C3D;
+        /*opacity: 0.7;*/
+        text-align: left;
+        height: 40px;
+        line-height: 40px;
+        /* width: 100%; */
+    }
+
+    .tc_tit a {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .question {
+
+        text-align: left;
+        text-indent: 20px;
+        padding-bottom: 20px;
+    }
+	.but {
+		margin: 30px 0;
+		padding: 15px 17px;
+		background: #333;
+		border: 0;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	button.but1{
+		background: #000000;
+	}
+	button.but2{
+		background: #ff9999;	
+	}
+	button.but3{
+		background: #99ccff;		
+	}
+	button.but4{
+		background: #99cc99;
+	}
+	button.but5{
+		background: #ff6666;
+	}
+</style>
+
+<script type="text/javascript">
+    var myVideo = document.getElementById("videos");
+
+    function playPause() {
+        if (myVideo.paused)
+            myVideo.play();
+        else
+            myVideo.pause();
+    }
+
+    function luyin() {
+        window.location.href = "o.html";
+    }
+
+    function wenben() {
+        window.location.href = "wenben.html";
+
+    }
+
+    function denglu() {
+        window.location.href = "denglu.html";
+
+    }
+
+
+
+    // 弹框
+    var setInter = 0;
+    main();
+
+    function main() {
+        setInter = setInterval(function () {
+            var vid = document.getElementById("videos");
+            var currentTime = vid.currentTime.toFixed(1);
+            console.log("时间" + currentTime);
+            if (currentTime > 1) {
+                chickMe();
+            }
+        }, 1500);
+    }
+
+    function chickMe() {
+        videos.pause();
+        let d2 = document.getElementById("d2");
+        d2.style.display = "block";
+        let d1 = document.getElementById("d1");
+        d1.style.display = "block";
+    }
+
+    function cancel() {
+        videos.pause();
+        let d2 = document.getElementById("d2");
+        d2.style.display = "none";
+        let d1 = document.getElementById("d1");
+        d1.style.display = "none";
+        clearInterval(setInter);
+        console.log("您点击了取消");
+    }
+
+    function confirm() {
+        console.log("您点击了确定");
+        let d2 = document.getElementById("d2");
+        d2.style.display = "none";
+        let d1 = document.getElementById("d1");
+        d1.style.display = "none";
+        videos.play();
+        clearInterval(setInter);
+    }
+
+    function closes() {
+        videos.pause();
+        let d2 = document.getElementById("d2");
+        d2.style.display = "none";
+        let d1 = document.getElementById("d1");
+        d1.style.display = "none";
+        console.log("点击关闭");
+    }
+
+    function stu_ques() {
+        videos.pause();
+        let d2 = document.getElementById("d2");
+        d2.style.display = "block";
+        let d1 = document.getElementById("d1");
+        d1.style.display = "block";
+    }
+</script>
+
+</html>
